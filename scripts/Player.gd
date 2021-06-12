@@ -1,18 +1,22 @@
 extends KinematicBody2D
 
 # Declare member variables here. Examples:
+#children
+onready var arrow = $"Charge Arrow"
+onready var sprite = $AnimatedSprite
 #physics
 var velocity = Vector2(0,0)
 var gravity = Vector2(0, 200) #(0, 200)
 var friction = .8
 #throwing
-var maxPower = 50.0
-var minPower = 10.0
+var maxPower = 1000.0
+var minPower = 100.0
 var maxChargeTime = 2000 #milliseconds
 var startTime = 0 #milliseconds
 var endTime = 0 #milliseconds
 var dir = Vector2()
 var UIArrowDistance = 128
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,7 +30,7 @@ func _ready():
 
 func _physics_process(delta):
 	var oldvel = velocity
-	move_and_slide(velocity + gravity)
+	move_and_slide(velocity + gravity, Vector2(0, -1))
 	var collision = null
 	for i in get_slide_count():
 		if i == 0:
@@ -46,21 +50,21 @@ func _physics_process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
+		if event.button_index == BUTTON_LEFT and event.pressed and is_on_floor():
 			startTime = OS.get_ticks_msec()
 			dir = Vector2(event.position - self.position)
 			dir = dir.normalized()
 			#UI charge arrow show
-			get_node("Charge Arrow").position = dir * UIArrowDistance
-			get_node("Charge Arrow").rotation = dir.tangent().angle() + PI
-			get_node("Charge Arrow").visible = true
-			get_node("Charge Arrow").play()
+			arrow.position = dir * UIArrowDistance
+			arrow.rotation = dir.tangent().angle() + PI
+			arrow.visible = true
+			arrow.play()
 			#flip player
-			if event.position.x < self.position.x and !get_node("AnimatedSprite").flip_h:
-				get_node("AnimatedSprite").flip_h = true
-			elif event.position.x > self.position.x and get_node("AnimatedSprite").flip_h:
-				get_node("AnimatedSprite").flip_h = false
-		if event.button_index == BUTTON_LEFT and !event.pressed:
+			if event.position.x < self.position.x and !sprite.flip_h:
+				sprite.flip_h = true
+			elif event.position.x > self.position.x and sprite.flip_h:
+				sprite.flip_h = false
+		if event.button_index == BUTTON_LEFT and !event.pressed and is_on_floor():
 			endTime = OS.get_ticks_msec()
 			var elapsedTime = endTime - startTime
 			var chargeTime = elapsedTime - floor(elapsedTime / maxChargeTime) * maxChargeTime
@@ -69,9 +73,10 @@ func _input(event):
 			print("charge", chargeTime)
 			print("interpolation", interpolation)
 			print("dir", dir)
+			velocity += dir
 			#UI charge arrow remove
-			get_node("Charge Arrow").position = Vector2(0, 0)
-			get_node("Charge Arrow").rotation = 0
-			get_node("Charge Arrow").visible = false
-			get_node("Charge Arrow").stop()
-			get_node("Charge Arrow").frame = 0
+			arrow.position = Vector2(0, 0)
+			arrow.rotation = 0
+			arrow.visible = false
+			arrow.stop()
+			arrow.frame = 0
