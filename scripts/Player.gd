@@ -1,7 +1,11 @@
-extends Node2D
-
+extends KinematicBody2D
 
 # Declare member variables here. Examples:
+#physics
+var velocity = Vector2(0,0)
+var gravity = Vector2(0, 200) #(0, 200)
+var friction = .8
+#throwing
 var maxPower = 50.0
 var minPower = 10.0
 var maxChargeTime = 2000 #milliseconds
@@ -20,10 +24,29 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func _physics_process(delta):
+	var oldvel = velocity
+	move_and_slide(velocity + gravity)
+	var collision = null
+	for i in get_slide_count():
+		if i == 0:
+			collision = get_slide_collision(i)
+	if collision == null:
+		velocity += gravity*delta
+	else:
+		var dot = collision.normal.dot(velocity)
+		if oldvel.length() > 10:
+			velocity -= dot * collision.normal
+		velocity = velocity*friction
+		oldvel = oldvel - velocity
+		if oldvel.length() > 1:
+			print(oldvel)
+		else:
+			velocity = Vector2(0,0)
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			#left click
 			startTime = OS.get_ticks_msec()
 			dir = Vector2(event.position - self.position)
 			dir = dir.normalized()
@@ -32,6 +55,11 @@ func _input(event):
 			get_node("Charge Arrow").rotation = dir.tangent().angle() + PI
 			get_node("Charge Arrow").visible = true
 			get_node("Charge Arrow").play()
+			#flip player
+			if event.position.x < self.position.x and !get_node("AnimatedSprite").flip_h:
+				get_node("AnimatedSprite").flip_h = true
+			elif event.position.x > self.position.x and get_node("AnimatedSprite").flip_h:
+				get_node("AnimatedSprite").flip_h = false
 		if event.button_index == BUTTON_LEFT and !event.pressed:
 			endTime = OS.get_ticks_msec()
 			var elapsedTime = endTime - startTime
