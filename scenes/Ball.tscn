@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/BigBall.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+
+# Declare member variables here.
+var velocity = Vector2(100, -500)
+var gravity = Vector2(0, 200)
+var friction = .8
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# Replace with function body.
+	pass
+
+
+func _physics_process(delta):
+	move_and_slide(velocity + gravity)
+	var collision = get_slide_collision(0)
+	if collision == null:
+		velocity += gravity*delta
+	else:
+		print(velocity)
+		velocity = velocity*friction
+"
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
