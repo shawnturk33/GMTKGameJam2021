@@ -18,13 +18,24 @@ func _ready():
 
 
 func _physics_process(delta):
+	var oldvel = velocity
 	move_and_slide(velocity + gravity)
-	var collision = get_slide_collision(0)
+	var collision = null
+	for i in get_slide_count():
+		if i == 0:
+			collision = get_slide_collision(i)
 	if collision == null:
 		velocity += gravity*delta
 	else:
-		print(velocity)
+		var dot = collision.normal.dot(velocity)
+		if oldvel.length() > 10:
+			velocity -= dot * collision.normal
 		velocity = velocity*friction
+		oldvel = oldvel - velocity
+		if oldvel.length() > 1:
+			print(oldvel)
+		else:
+			velocity = Vector2(0,0)
 "
 
 [sub_resource type="CircleShape2D" id=2]
