@@ -8,7 +8,7 @@ var maxChargeTime = 2000 #milliseconds
 var startTime = 0 #milliseconds
 var endTime = 0 #milliseconds
 var dir = Vector2()
-var UIArrowDistance = 64
+var UIArrowDistance = 128
 
 
 # Called when the node enters the scene tree for the first time.
