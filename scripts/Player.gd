@@ -64,6 +64,8 @@ func _input(event):
 				sprite.flip_h = true
 			elif event.position.x > self.position.x and sprite.flip_h:
 				sprite.flip_h = false
+			#get into throw stance
+			sprite.play("throw start")
 		if event.button_index == BUTTON_LEFT and !event.pressed and is_on_floor():
 			endTime = OS.get_ticks_msec()
 			var elapsedTime = endTime - startTime
@@ -80,3 +82,10 @@ func _input(event):
 			arrow.visible = false
 			arrow.stop()
 			arrow.frame = 0
+			#play throw anim
+			sprite.play("throw")
+
+
+func _on_AnimatedSprite_animation_finished():
+	if sprite.animation == "throw":
+		sprite.play("idle")
