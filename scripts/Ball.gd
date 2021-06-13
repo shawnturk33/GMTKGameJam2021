@@ -10,6 +10,7 @@ var velocity = Vector2(0, 0)
 var gravity = Vector2(0, 400)
 var friction = .8
 var enabled = false
+var bThud = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,8 +23,10 @@ func _ready():
 func _physics_process(delta):
 	print("pos", self.global_position)
 	if enabled:
+		if velocity != Vector2(0, 0) and !is_on_wall() and !is_on_floor():
+			bThud = true
 		var oldvel = velocity
-		move_and_slide(velocity + gravity)
+		move_and_slide(velocity + gravity, Vector2(0, -1))
 		var collision = null
 		for i in get_slide_count():
 			if i == 0:
@@ -31,7 +34,9 @@ func _physics_process(delta):
 		if collision == null:
 			velocity += gravity*delta
 		else:
-			thud.play()
+			if bThud:
+				thud.play()
+				bThud = false
 			var dot = collision.normal.dot(velocity)
 			if oldvel.length() > 10:
 				velocity -= dot * collision.normal
