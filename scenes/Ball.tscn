@@ -1,66 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sprites/BigBall.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Ball.gd" type="Script" id=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends KinematicBody2D
-
-
-# Declare member variables here.
-var velocity = Vector2(100, -500)
-var gravity = Vector2(0, 200)
-var friction = .8
-var enabled = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# Replace with function body.
-	$BallCollider.disabled = true
-	$Sprite.visible = false
-
-
-func _physics_process(delta):
-	if enabled:
-		var oldvel = velocity
-		move_and_slide(velocity + gravity)
-		var collision = null
-		for i in get_slide_count():
-			if i == 0:
-				collision = get_slide_collision(i)
-		if collision == null:
-			velocity += gravity*delta
-		else:
-			var dot = collision.normal.dot(velocity)
-			if oldvel.length() > 10:
-				velocity -= dot * collision.normal
-			velocity = velocity*friction
-			oldvel = oldvel - velocity
-			if oldvel.length() > 1:
-				emit_signal(\"bumpPlayer\", oldvel)
-			else:
-				velocity = Vector2(0,0)
-
-func throwBall(vel, pos):
-	setEnabled(true)
-	velocity = vel
-
-func setEnabled(new):
-	if(new != enabled):
-		enabled = new
-		$BallCollider.disabled = !new
-		$Sprite.visible = new
-		if!enabled:
-			velocity = Vector2(0,0)
-"
-
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 
 [node name="Ball" type="KinematicBody2D"]
-script = SubResource( 1 )
+script = ExtResource( 2 )
 
 [node name="BallCollider" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
