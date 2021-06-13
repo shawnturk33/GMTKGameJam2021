@@ -92,3 +92,7 @@ func _input(event):
 func _on_AnimatedSprite_animation_finished():
 	if sprite.animation == "throw":
 		sprite.play("idle")
+
+
+func _on_DeathBox_death():
+	get_tree().reload_current_scene()
