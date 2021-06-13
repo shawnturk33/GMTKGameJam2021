@@ -19,12 +19,15 @@ position = Vector2( 3200, -1904 )
 nextSceneString = "scenes/Test scene.tscn"
 
 [node name="DeathBox" parent="." instance=ExtResource( 4 )]
-position = Vector2( 3488, 192 )
+position = Vector2( 3496, 384 )
 scale = Vector2( 1.5, 1 )
 
 [node name="DeathBox2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 4960, -224 )
+position = Vector2( 4960, -8 )
 scale = Vector2( 1.5, 1 )
 
 [node name="PlayerManager" parent="." instance=ExtResource( 2 )]
 position = Vector2( 8, 0 )
+
+[connection signal="death" from="DeathBox" to="PlayerManager" method="_on_DeathBox_death"]
+[connection signal="death" from="DeathBox2" to="PlayerManager" method="_on_DeathBox_death"]

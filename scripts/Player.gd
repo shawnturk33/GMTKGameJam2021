@@ -112,10 +112,6 @@ func _on_AnimatedSprite_animation_finished():
 	if sprite.animation == "throw":
 		sprite.play("idle")
 
-
-func _on_DeathBox_death():
-	get_tree().reload_current_scene()
-
 func pull(vel, pos):
 	var dist = global_position - pos
 	if dist.length() > 256:
@@ -137,3 +133,7 @@ func pull(vel, pos):
 
 func bump(vel):
 	pass
+
+
+func _on_PlayerManager_death():
+	get_tree().reload_current_scene()
