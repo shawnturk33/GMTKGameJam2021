@@ -27,15 +27,15 @@ animations = [ {
 "name": "throw",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "hang",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 1 ) ],
 "loop": false,
 "name": "throw start",
 "speed": 16.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "hang",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": false,
@@ -43,8 +43,9 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 40, 63 )
+[sub_resource type="CapsuleShape2D" id=23]
+radius = 32.0
+height = 64.0
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -167,8 +168,7 @@ position = Vector2( 2, -102 )
 position = Vector2( 3, 104 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 3 )
+shape = SubResource( 23 )
 one_way_collision = true
 
 [node name="Charge Arrow" type="AnimatedSprite" parent="."]
