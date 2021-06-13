@@ -116,7 +116,9 @@ func _on_AnimatedSprite_animation_finished():
 
 func pull(vel, pos):
 	var dist = global_position - pos
-	if dist.length() > 256:
+	if dist.length() > 1500:
+		emit_signal("ballEnable", false)
+	elif dist.length() > 256:
 		var move = (pos + dist.normalized() * 256) - global_position
 		if move.length() > 1:
 			move_and_slide(Vector2(0, move.y))
