@@ -17,7 +17,7 @@ tile_data = PoolIntArray( -4915106, 7, 0, -4849570, 7, 0, -4784034, 7, 0, -47184
 
 [node name="Door" parent="." instance=ExtResource( 3 )]
 position = Vector2( 3200, -1904 )
-nextSceneString = "scenes/level2.tscn"
+nextSceneString = "scenes/Level2.tscn"
 
 [node name="DeathBox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 3392, 384 )
@@ -30,10 +30,12 @@ position = Vector2( 24, 0 )
 
 [node name="slav" type="Sprite" parent="."]
 position = Vector2( 4273.87, -35.7458 )
+z_index = -1
 texture = ExtResource( 6 )
 
 [node name="slav2" type="Sprite" parent="."]
 position = Vector2( 4112, -36.1204 )
+z_index = -1
 texture = ExtResource( 6 )
 flip_h = true
 
