@@ -10,31 +10,46 @@ script/source = "extends KinematicBody2D
 var velocity = Vector2(100, -500)
 var gravity = Vector2(0, 200)
 var friction = .8
+var enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Replace with function body.
-	pass
+	$BallCollider.disabled = true
+	$Sprite.visible = false
 
 
 func _physics_process(delta):
-	var oldvel = velocity
-	move_and_slide(velocity + gravity)
-	var collision = null
-	for i in get_slide_count():
-		if i == 0:
-			collision = get_slide_collision(i)
-	if collision == null:
-		velocity += gravity*delta
-	else:
-		var dot = collision.normal.dot(velocity)
-		if oldvel.length() > 10:
-			velocity -= dot * collision.normal
-		velocity = velocity*friction
-		oldvel = oldvel - velocity
-		if oldvel.length() > 1:
-			print(oldvel)
+	if enabled:
+		var oldvel = velocity
+		move_and_slide(velocity + gravity)
+		var collision = null
+		for i in get_slide_count():
+			if i == 0:
+				collision = get_slide_collision(i)
+		if collision == null:
+			velocity += gravity*delta
 		else:
+			var dot = collision.normal.dot(velocity)
+			if oldvel.length() > 10:
+				velocity -= dot * collision.normal
+			velocity = velocity*friction
+			oldvel = oldvel - velocity
+			if oldvel.length() > 1:
+				emit_signal(\"bumpPlayer\", oldvel)
+			else:
+				velocity = Vector2(0,0)
+
+func throwBall(vel):
+	setEnabled(true)
+	velocity = vel
+
+func setEnabled(new):
+	if(new != enabled):
+		enabled = new
+		$BallCollider.disabled = !new
+		$Sprite.visible = new
+		if!enabled:
 			velocity = Vector2(0,0)
 "
 
