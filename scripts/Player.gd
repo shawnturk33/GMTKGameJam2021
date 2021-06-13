@@ -16,6 +16,7 @@ var startTime = 0 #milliseconds
 var endTime = 0 #milliseconds
 var dir = Vector2()
 var UIArrowDistance = 128
+var leftClickFlag = false
 
 
 
@@ -44,7 +45,8 @@ func _physics_process(delta):
 		velocity = velocity*friction
 		oldvel = oldvel - velocity
 		if oldvel.length() > 1:
-			print(oldvel)
+			#print(oldvel)
+			pass
 		else:
 			velocity = Vector2(0,0)
 
@@ -52,8 +54,10 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed and is_on_floor():
 			startTime = OS.get_ticks_msec()
-			dir = Vector2(event.position - self.position)
+			dir = Vector2(get_global_mouse_position() - self.position)
 			dir = dir.normalized()
+			print("event", get_global_mouse_position())
+			print("self.position", self.position)
 			#UI charge arrow show
 			arrow.position = dir * UIArrowDistance
 			arrow.rotation = dir.tangent().angle() + PI
@@ -66,15 +70,14 @@ func _input(event):
 				sprite.flip_h = false
 			#get into throw stance
 			sprite.play("throw start")
-		if event.button_index == BUTTON_LEFT and !event.pressed and is_on_floor():
+			leftClickFlag = true
+		if event.button_index == BUTTON_LEFT and !event.pressed and leftClickFlag:
+			leftClickFlag = false
 			endTime = OS.get_ticks_msec()
 			var elapsedTime = endTime - startTime
 			var chargeTime = elapsedTime - floor(elapsedTime / maxChargeTime) * maxChargeTime
 			var interpolation = minPower + (maxPower - minPower) * (chargeTime / maxChargeTime) #interpolate power with charge time
 			dir *= interpolation
-			print("charge", chargeTime)
-			print("interpolation", interpolation)
-			print("dir", dir)
 			velocity += dir
 			#UI charge arrow remove
 			arrow.position = Vector2(0, 0)
