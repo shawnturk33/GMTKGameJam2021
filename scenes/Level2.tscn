@@ -34,11 +34,11 @@ position = Vector2( 2304, 2368 )
 position = Vector2( 3776, 2432 )
 
 [node name="slav" type="Sprite" parent="."]
-position = Vector2( 504, 2072 )
+position = Vector2( 656, 2072 )
 texture = ExtResource( 5 )
 
 [node name="slav2" type="Sprite" parent="."]
-position = Vector2( 336, 2072 )
+position = Vector2( 472, 2072 )
 texture = ExtResource( 5 )
 flip_h = true
 
