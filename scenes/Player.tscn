@@ -137,6 +137,7 @@ animations = [ {
 } ]
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -149,6 +150,12 @@ position = Vector2( 8, -48 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
+
+[node name="FlyNode" type="Node2D" parent="AnimatedSprite"]
+position = Vector2( 2, -102 )
+
+[node name="FootNode" type="Node2D" parent="AnimatedSprite"]
+position = Vector2( 3, 104 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

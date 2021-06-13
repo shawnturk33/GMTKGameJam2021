@@ -9,4 +9,7 @@
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
 
+[connection signal="rotateChain" from="Player" to="Ball" method="chain"]
+[connection signal="tetherBall" from="Player" to="Ball" method="tether"]
 [connection signal="throwing_force" from="Player" to="Ball" method="throwBall"]
+[connection signal="pullPlayer" from="Ball" to="Player" method="pull"]

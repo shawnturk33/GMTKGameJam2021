@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal throwing_force(dir, pos)
+signal tetherBall(norm)
+signal rotateChain(pos)
 
 # Declare member variables here. Examples:
 #children
@@ -9,11 +11,11 @@ onready var sprite = $AnimatedSprite
 onready var grunt = $"Grunt"
 #physics
 var velocity = Vector2(0,0)
-var gravity = Vector2(0, 200) #(0, 200)
+var gravity = Vector2(0, 400) #(0, 200)
 var friction = .8
 #throwing
-var maxPower = 1000.0
-var minPower = 100.0
+var maxPower = 1500.0
+var minPower = 600.0
 var maxChargeTime = 2000 #milliseconds
 var startTime = 0 #milliseconds
 var endTime = 0 #milliseconds
@@ -55,9 +57,14 @@ func _physics_process(delta):
 	if !is_on_floor():
 		sprite.play("hang")
 		sprite.set_rotation(velocity.angle() + PI/2)
-	elif sprite.animation == "hang":
-		sprite.play("idle")
-		sprite.set_rotation(0)
+		emit_signal("rotateChain", $AnimatedSprite/FlyNode.global_position)
+	else:
+		if sprite.animation == "hang":
+			sprite.play("idle")
+			sprite.set_rotation(0)
+		emit_signal("rotateChain", $AnimatedSprite/FootNode.global_position)
+		
+	
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -106,3 +113,25 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_DeathBox_death():
 	get_tree().reload_current_scene()
+
+func pull(vel, pos):
+	var dist = global_position - pos
+	if dist.length() > 256:
+		var move = (pos + dist.normalized() * 256) - global_position
+		if move.length() > 1:
+			move_and_slide(Vector2(0, move.y))
+			var collision = null
+			for i in get_slide_count():
+				if i == 0:
+					collision = get_slide_collision(i)
+			move_and_slide(Vector2(move.x, 0))
+			for i in get_slide_count():
+				if i == 0:
+					collision = get_slide_collision(i)
+			if collision != null:
+				emit_signal("tetherBall", collision.normal)
+			else:
+				velocity = (-dist.normalized()) * max(vel.length()*1.1, velocity.length())
+
+func bump(vel):
+	pass
