@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GMTKGameJam2021"
-run/main_scene="res://scenes/Test scene.tscn"
+run/main_scene="res://scenes/mainLevel.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -37,6 +37,11 @@ window/size/height=720
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
+
+[global]
+
+scene=false
+start=false
 
 [physics]
 

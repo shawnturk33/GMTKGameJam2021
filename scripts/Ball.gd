@@ -15,6 +15,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	print("pos", self.global_position)
 	if enabled:
 		var oldvel = velocity
 		move_and_slide(velocity + gravity)
