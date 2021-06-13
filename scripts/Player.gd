@@ -64,9 +64,9 @@ func _input(event):
 			arrow.visible = true
 			arrow.play()
 			#flip player
-			if event.position.x < self.position.x and !sprite.flip_h:
+			if get_global_mouse_position().x < self.global_position.x and !sprite.flip_h:
 				sprite.flip_h = true
-			elif event.position.x > self.position.x and sprite.flip_h:
+			elif get_global_mouse_position().x > self.global_position.x and sprite.flip_h:
 				sprite.flip_h = false
 			#get into throw stance
 			sprite.play("throw start")
@@ -95,4 +95,5 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_DeathBox_death():
+	yield(get_tree().create_timer(2.0), "timeout")
 	get_tree().reload_current_scene()
