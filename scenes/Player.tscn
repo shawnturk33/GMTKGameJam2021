@@ -163,6 +163,7 @@ __meta__ = {
 
 [node name="Grunt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
+volume_db = -15.0
 
 [node name="Grunt2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
