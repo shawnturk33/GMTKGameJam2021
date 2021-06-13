@@ -74,8 +74,6 @@ func _input(event):
 			startTime = OS.get_ticks_msec()
 			dir = Vector2(get_global_mouse_position() - self.global_position)
 			dir = dir.normalized()
-			print("event", get_global_mouse_position())
-			print("self.position", self.global_position)
 			#UI charge arrow show
 			arrow.position = dir * UIArrowDistance
 			arrow.rotation = dir.tangent().angle() + PI
@@ -87,30 +85,34 @@ func _input(event):
 			elif get_global_mouse_position().x > self.global_position.x and sprite.flip_h:
 				sprite.flip_h = false
 			#get into throw stance
-			sprite.play("throw start")
+			sprite.play("throw windup")
 			grunt.play()
 			leftClickFlag = true
 		if event.button_index == BUTTON_LEFT and !event.pressed and leftClickFlag:
+			#play throw anim
+			sprite.play("throw start")
 			leftClickFlag = false
 			endTime = OS.get_ticks_msec()
 			var elapsedTime = endTime - startTime
 			var chargeTime = elapsedTime - floor(elapsedTime / maxChargeTime) * maxChargeTime
 			var interpolation = minPower + (maxPower - minPower) * (chargeTime / maxChargeTime) #interpolate power with charge time
 			dir *= interpolation
-			emit_signal("throwing_force", dir, self.global_position)
 			#UI charge arrow remove
 			arrow.position = Vector2(0, 0)
 			arrow.rotation = 0
 			arrow.visible = false
 			arrow.stop()
 			arrow.frame = 0
-			#play throw anim
-			sprite.play("throw")
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 
 func _on_AnimatedSprite_animation_finished():
 	if sprite.animation == "throw":
 		sprite.play("idle")
+	elif sprite.animation == "throw start":
+		sprite.play("throw")
+		emit_signal("throwing_force", dir, self.global_position)
 
 func pull(vel, pos):
 	var dist = global_position - pos
@@ -133,7 +135,6 @@ func pull(vel, pos):
 
 func bump(vel):
 	pass
-
 
 func _on_PlayerManager_death():
 	get_tree().reload_current_scene()

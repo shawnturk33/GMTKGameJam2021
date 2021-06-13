@@ -21,7 +21,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	print("pos", self.global_position)
 	if enabled:
 		if velocity != Vector2(0, 0) and !is_on_wall() and !is_on_floor():
 			bThud = true
