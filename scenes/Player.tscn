@@ -45,7 +45,7 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=23]
 radius = 32.0
-height = 64.0
+height = 63.0
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -168,6 +168,7 @@ position = Vector2( 2, -102 )
 position = Vector2( 3, 104 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.235962, 0.707905 )
 shape = SubResource( 23 )
 one_way_collision = true
 

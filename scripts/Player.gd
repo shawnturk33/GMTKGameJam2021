@@ -57,12 +57,12 @@ func _physics_process(delta):
 			velocity = Vector2(0,0)
 	if !is_on_floor():
 		sprite.play("hang")
-		sprite.set_rotation(velocity.angle() + PI/2)
+		self.set_rotation(velocity.angle() + PI/2)
 		emit_signal("rotateChain", $AnimatedSprite/FlyNode.global_position)
 	else:
 		if sprite.animation == "hang":
 			sprite.play("idle")
-			sprite.set_rotation(0)
+			self.set_rotation(0)
 		emit_signal("rotateChain", $AnimatedSprite/FootNode.global_position)
 		
 	
