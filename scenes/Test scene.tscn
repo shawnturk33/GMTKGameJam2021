@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/bg.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/DeathBox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -50,23 +50,9 @@ shape = SubResource( 3 )
 position = Vector2( -544, -280 )
 shape = SubResource( 2 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1024, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
-centered = false
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="DeathBox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1176, 864 )
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
 
 [connection signal="death" from="DeathBox" to="Player" method="_on_DeathBox_death"]
