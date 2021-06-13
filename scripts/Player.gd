@@ -49,6 +49,14 @@ func _physics_process(delta):
 			pass
 		else:
 			velocity = Vector2(0,0)
+	if !is_on_floor():
+		#sprite.play("hang")
+		#sprite.set_rotation(get_angle_to(velocity.normalized()))
+		pass
+	elif sprite.animation == "hang":
+		pass
+		#sprite.play("idle")
+		#sprite.set_rotation(0)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -95,5 +103,4 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_DeathBox_death():
-	yield(get_tree().create_timer(2.0), "timeout")
 	get_tree().reload_current_scene()

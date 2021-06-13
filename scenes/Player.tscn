@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sprites/main_char_throw.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/main_char_recovery.png" type="Texture" id=4]
 [ext_resource path="res://sprites/main_char_smear.png" type="Texture" id=5]
 [ext_resource path="res://sprites/main_char_stationary.png" type="Texture" id=6]
+[ext_resource path="res://sprites/main_char_hang.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -25,6 +26,11 @@ animations = [ {
 "loop": false,
 "name": "throw",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "hang",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]

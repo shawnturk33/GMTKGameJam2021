@@ -16,6 +16,6 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_DeathBox_body_exited(body):
-	emit_signal("death")
+func _on_DeathBox_body_entered(body):
+	if body is KinematicBody2D:
+		emit_signal("death")

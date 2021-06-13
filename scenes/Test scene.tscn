@@ -31,7 +31,7 @@ position = Vector2( 0, 104 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1160, 104 )
+position = Vector2( 1320, 104 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -67,8 +67,6 @@ __meta__ = {
 }
 
 [node name="DeathBox" parent="." instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 1064, 288 )
-scale = Vector2( 50, 20 )
+position = Vector2( 1176, 864 )
 
 [connection signal="death" from="DeathBox" to="Player" method="_on_DeathBox_death"]
