@@ -62,12 +62,14 @@ func chain(pos):
 	$ChainPivot.rotation = dir.angle()
 	$ChainPivot/chain_chain.region_rect = Rect2(0,0, dir.length()-18,32)
 	$ChainPivot/chain_chain.set_offset(Vector2(dir.length()/2 + 12, 0));
+	if enabled && !$ChainPivot/chain_chain.visible:
+		$ChainPivot/chain_chain.visible = true
 
 func setEnabled(new):
 	if(new != enabled):
 		enabled = new
 		$BallCollider.disabled = !new
 		$Sprite.visible = new
-		$ChainPivot/chain_chain.visible = new
 		if!enabled:
 			velocity = Vector2(0,0)
+			$ChainPivot/chain_chain.visible = false
