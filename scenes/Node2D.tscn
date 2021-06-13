@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/PathAndObjects.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tileset.png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Tile1" type="Sprite" parent="."]
+position = Vector2( -128, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tile1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tile1/StaticBody2D"]
+polygon = PoolVector2Array( -32.2427, -32.0758, 32.104, -31.899, 32.104, -9.44836, -2.72099, -10.1555, -9.26173, -3.7915, -9.26173, 32.0942, -31.8892, 32.0942 )
+
+[node name="Tile2" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tile2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tile2/StaticBody2D"]
+polygon = PoolVector2Array( -32.3621, -9.00275, 31.8214, -9.47469, 31.8214, -32.1277, -31.8901, -32.1277 )
+
+[node name="Tile3" type="Sprite" parent="."]
+position = Vector2( 128, 0 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 64, 64 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tile3"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tile3/StaticBody2D"]
+polygon = PoolVector2Array( -32.3621, -9.00275, 31.8214, -9.47469, 31.8214, -32.1277, -31.8901, -32.1277 )
