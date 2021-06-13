@@ -54,10 +54,10 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed and is_on_floor():
 			startTime = OS.get_ticks_msec()
-			dir = Vector2(get_global_mouse_position() - self.position)
+			dir = Vector2(get_global_mouse_position() - self.global_position)
 			dir = dir.normalized()
 			print("event", get_global_mouse_position())
-			print("self.position", self.position)
+			print("self.position", self.global_position)
 			#UI charge arrow show
 			arrow.position = dir * UIArrowDistance
 			arrow.rotation = dir.tangent().angle() + PI
