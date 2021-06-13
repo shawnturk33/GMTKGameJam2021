@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal throwing_force(dir, pos)
 signal tetherBall(norm)
 signal rotateChain(pos)
+signal ballEnable(enabled)
 
 # Declare member variables here. Examples:
 #children
@@ -69,6 +70,7 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed and is_on_floor():
+			emit_signal("ballEnable", false)
 			startTime = OS.get_ticks_msec()
 			dir = Vector2(get_global_mouse_position() - self.global_position)
 			dir = dir.normalized()

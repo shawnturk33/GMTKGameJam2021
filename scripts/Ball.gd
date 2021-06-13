@@ -56,6 +56,8 @@ func tether(norm):
 func chain(pos):
 	var dir = pos - global_position
 	$ChainPivot.rotation = dir.angle()
+	$ChainPivot/chain_chain.region_rect = Rect2(0,0, dir.length()-18,32)
+	$ChainPivot/chain_chain.set_offset(Vector2(dir.length()/2 + 12, 0));
 
 func setEnabled(new):
 	if(new != enabled):
