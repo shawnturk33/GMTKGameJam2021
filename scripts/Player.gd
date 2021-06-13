@@ -6,6 +6,7 @@ signal throwing_force(dir, pos)
 #children
 onready var arrow = $"Charge Arrow"
 onready var sprite = $AnimatedSprite
+onready var grunt = $"Grunt"
 #physics
 var velocity = Vector2(0,0)
 var gravity = Vector2(0, 200) #(0, 200)
@@ -78,6 +79,7 @@ func _input(event):
 				sprite.flip_h = false
 			#get into throw stance
 			sprite.play("throw start")
+			grunt.play()
 			leftClickFlag = true
 		if event.button_index == BUTTON_LEFT and !event.pressed and leftClickFlag:
 			leftClickFlag = false

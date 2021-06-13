@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Huh hee tuh.wav-817a3d7614606e67e5d0d8ed0d92d598.sample"
+
+[deps]
+
+source_file="res://sound/Huh hee tuh.wav"
+dest_files=[ "res://.import/Huh hee tuh.wav-817a3d7614606e67e5d0d8ed0d92d598.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

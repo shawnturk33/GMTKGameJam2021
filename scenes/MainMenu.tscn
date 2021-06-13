@@ -63,10 +63,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ball" type="TextureRect" parent="Menu/CenterRow/CenterContainer"]
-margin_left = 126.0
-margin_top = 245.0
-margin_right = 190.0
-margin_bottom = 309.0
+margin_left = 227.0
+margin_top = 214.0
+margin_right = 291.0
+margin_bottom = 278.0
 texture = ExtResource( 4 )
 
 [node name="Character" type="TextureRect" parent="Menu/CenterRow/CenterContainer"]

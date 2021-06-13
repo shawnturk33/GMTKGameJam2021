@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 # Declare member variables here.
+onready var thud = $"thud"
 var velocity = Vector2(100, -500)
 var gravity = Vector2(0, 200)
 var friction = .8
@@ -26,6 +27,7 @@ func _physics_process(delta):
 		if collision == null:
 			velocity += gravity*delta
 		else:
+			thud.play()
 			var dot = collision.normal.dot(velocity)
 			if oldvel.length() > 10:
 				velocity -= dot * collision.normal
