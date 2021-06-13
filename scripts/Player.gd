@@ -50,13 +50,11 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2(0,0)
 	if !is_on_floor():
-		#sprite.play("hang")
-		#sprite.set_rotation(get_angle_to(velocity.normalized()))
-		pass
+		sprite.play("hang")
+		sprite.set_rotation(velocity.angle() + PI/2)
 	elif sprite.animation == "hang":
-		pass
-		#sprite.play("idle")
-		#sprite.set_rotation(0)
+		sprite.play("idle")
+		sprite.set_rotation(0)
 
 func _input(event):
 	if event is InputEventMouseButton:
