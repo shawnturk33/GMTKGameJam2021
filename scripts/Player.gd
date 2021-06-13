@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal throwing_force(dir, pos)
+
 # Declare member variables here. Examples:
 #children
 onready var arrow = $"Charge Arrow"
@@ -84,7 +86,7 @@ func _input(event):
 			var chargeTime = elapsedTime - floor(elapsedTime / maxChargeTime) * maxChargeTime
 			var interpolation = minPower + (maxPower - minPower) * (chargeTime / maxChargeTime) #interpolate power with charge time
 			dir *= interpolation
-			velocity += dir
+			emit_signal("throwing_force", dir, self.global_position)
 			#UI charge arrow remove
 			arrow.position = Vector2(0, 0)
 			arrow.rotation = 0

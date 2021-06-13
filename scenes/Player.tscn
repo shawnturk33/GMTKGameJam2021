@@ -17,6 +17,11 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "hang",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "throw start",
@@ -26,11 +31,6 @@ animations = [ {
 "loop": false,
 "name": "throw",
 "speed": 8.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "hang",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -148,6 +148,7 @@ animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 3 )
 
 [node name="Charge Arrow" type="AnimatedSprite" parent="."]

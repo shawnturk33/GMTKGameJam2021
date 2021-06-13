@@ -8,3 +8,5 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
+
+[connection signal="throwing_force" from="Player" to="Ball" method="throwBall"]

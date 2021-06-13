@@ -40,7 +40,7 @@ func _physics_process(delta):
 			else:
 				velocity = Vector2(0,0)
 
-func throwBall(vel):
+func throwBall(vel, pos):
 	setEnabled(true)
 	velocity = vel
 
@@ -58,7 +58,7 @@ func setEnabled(new):
 [node name="Ball" type="KinematicBody2D"]
 script = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BallCollider" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 2 )
 
